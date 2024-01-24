@@ -16,7 +16,11 @@ $(document).ready(function () {
 
                 var cardText = this.closest(".card").querySelector(".card-text");
                 cardText.innerHTML = "";
-                for (var jobID in data) {
+
+                if (data === 1) {cardText.innerHTML = "No Position Open Right Now.";}
+                else if (data === -1) {cardText.innerHTML = "No Careers Link";}
+                else {
+                    for (var jobID in data) {
                     var job = data[jobID];
                     var link = document.createElement("a");
                     link.href = job.link;
@@ -25,6 +29,8 @@ $(document).ready(function () {
 
                     cardText.appendChild(link);
                 }
+                }
+
             })
             .catch(error => {
                 console.error("Error: ",error);

@@ -155,15 +155,19 @@ def checkColab(url):
         return
     finally:
         driver.quit()
+
+def checkPolyU(url):
+    return "1" # No job post
 def main():
     # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
     # jobFile = checkVerafin(verafin_link)
     # print(jobFile)
 
-    colab_link = "https://www.colabsoftware.com/careers#openings"
-    jobfile = checkColab(colab_link)
-    print(jobfile)
+    # colab_link = "https://www.colabsoftware.com/careers#openings"
+    # jobfile = checkColab(colab_link)
+    # print(jobfile)
 
+    polu_link = "https://www.polyunity.com/work-with-us"
     '''
     /html/body/div[3]/div[5]/div/div/div[1]/div
     /html/body/div[3]/div[5]/div/div/div[1]/div/a[1]

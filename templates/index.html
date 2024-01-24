@@ -133,56 +133,6 @@
     </symbol>
 </svg>
 
-<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button aria-expanded="false" aria-label="Toggle theme (light)"
-            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-            data-bs-toggle="dropdown" id="bd-theme" type="button">
-        <svg class="bi my-1 theme-icon-active" height="1em" width="1em">
-            <use href="#sun-fill"></use>
-        </svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul aria-labelledby="bd-theme-text" class="dropdown-menu dropdown-menu-end shadow">
-        <li>
-            <button aria-pressed="true" class="dropdown-item d-flex align-items-center active"
-                    data-bs-theme-value="light"
-                    type="button">
-                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
-                    <use href="#sun-fill"></use>
-                </svg>
-                Light
-                <svg class="bi ms-auto d-none" height="1em" width="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                    type="button">
-                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
-                    <use href="#moon-stars-fill"></use>
-                </svg>
-                Dark
-                <svg class="bi ms-auto d-none" height="1em" width="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
-                    type="button">
-                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
-                    <use href="#circle-half"></use>
-                </svg>
-                Auto
-                <svg class="bi ms-auto d-none" height="1em" width="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-    </ul>
-</div>
-
 
 <header data-bs-theme="dark">
     <div class="collapse text-bg-dark" id="navbarHeader">
@@ -230,21 +180,21 @@
 <main data-bs-theme="light">
 
     <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="row py-lg-1">
+            <div class="col-lg-10 col-md-10 mx-auto">
                 <h1 class="fw-light">TechTrove Careers</h1>
-                <p class="lead text-body-secondary">TechTrove Careers is an innovative job search tool designed exclusively for discovering career opportunities in AIP tech companies based in Newfoundland and Labrador.
+                <p class="lead text-body-secondary">TechTrove Careers is an innovative job search tool designed exclusively for discovering career opportunities in tech companies based in Newfoundland and Labrador.<br>
                   With a simple click on a company icon, job seekers can access the latest job postings from a curated selection of top tech firms in the region.
-                  Our platform simplifies the search process, making it easier and faster for professionals to find their ideal tech role in NL. Whether you're a local talent or looking to move to this vibrant tech hub, TechTrove Careers is your gateway to exciting career possibilities in the AIP tech sector.</p>
+                  Our platform simplifies the search process, making it easier and faster for professionals to find their ideal tech role in NL. </p>
                 <p>
-                    <a class="btn btn-primary my-2" href="#">Main call to action</a>
-                    <a class="btn btn-secondary my-2" href="#">Secondary action</a>
+<!--                    <a class="btn btn-primary my-2" href="#">Main call to action</a>-->
+<!--                    <a class="btn btn-secondary my-2" href="#">Secondary action</a>-->
                 </p>
             </div>
         </div>
     </section>
 
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album py-3 bg-body-tertiary">
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -284,7 +234,7 @@
                             <p class="card-text">PolyUnit Careers</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button id="polyunityButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                    <button id="polyunityButton" class="btn btn-sm btn-outline-secondary viewJobsButton" type="button" data-endpoint="/polyu">View Jobs</button>
                                 </div>
                             </div>
                         </div>

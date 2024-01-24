@@ -3,6 +3,7 @@ import json
 
 from flask import Flask,request,render_template,jsonify,Response
 from getCompniesCareerPage import checkVerafin,checkColab
+import getCompniesCareerPage
 
 app = Flask(__name__,static_folder='assets')
 
@@ -22,7 +23,7 @@ def getVerafinJobs():
         data = readjson(jobfile)
         print(data)
         return data
-    else: return
+    else: return "-1"
 
 @app.route("/colab", methods=["POST"])
 def getColab():
@@ -35,7 +36,22 @@ def getColab():
         print(data)
         return data
     else:
-        return
+        return "-1"
+
+@app.route("/polyu", methods=["POST"])
+def getPolyU():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "polyunit")
+
+    if url:
+        jobfile = getCompniesCareerPage.checkPolyU(url)
+        if jobfile == "1" :
+            return "1"  # No job post
+        data = readjson(jobfile)
+        print(data)
+        return data
+    else:
+        return "-1"
 
 def readjson(filePath):
     try:
