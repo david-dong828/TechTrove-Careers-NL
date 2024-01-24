@@ -1,5 +1,7 @@
 $(document).ready(function () {
     $(".viewJobsButton").click( function () {
+        $("#loadingbutton").css("display","flex");
+
         var endpoint = $(this).data("endpoint")
         fetch(endpoint, {
             method: "POST",
@@ -10,6 +12,8 @@ $(document).ready(function () {
         })
             .then(resp => resp.json())
             .then(data => {
+                $("#loadingbutton").css("display","none");
+
                 var cardText = this.closest(".card").querySelector(".card-text");
                 cardText.innerHTML = "";
                 for (var jobID in data) {
@@ -24,6 +28,7 @@ $(document).ready(function () {
             })
             .catch(error => {
                 console.error("Error: ",error);
+                $("#loadingbutton").css("display","none");
             });
     });
 });

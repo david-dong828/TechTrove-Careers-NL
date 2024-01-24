@@ -250,8 +250,8 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img src="../assets/verafin_pic.jpg"
-                            alt="verafin" height="225" width="420" style="border: 1px solid black">
+                        <img class="card-img-top" src="../assets/verafin_pic.jpg"
+                            alt="verafin" >
                         <div class="card-body">
                             <p class="card-text">Verafin Careers</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -264,8 +264,8 @@
                 </div>
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img src="../assets/colab_pic.jpg"
-                            alt="colab" height="225" width="420" style="border: 1px solid black">
+                        <img class="card-img-top"  src="../assets/colab_pic.jpg"
+                            alt="colab" >
                         <div class="card-body">
                             <p class="card-text">CoLab Careers</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -278,8 +278,8 @@
                 </div>
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img src="../assets/PolyUnity_pic.png"
-                            alt="polyunit" height="225" width="420" style="border: 1px solid black">
+                        <img class="card-img-top"  src="../assets/PolyUnity_pic.png"
+                            alt="polyunit" >
                         <div class="card-body">
                             <p class="card-text">PolyUnit Careers</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -333,6 +333,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col">
                     <div class="card shadow-sm">
                         <img src="../assets/otherocean_pic.jpg"
@@ -342,6 +343,20 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button id="sotheroceanButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/avalonholographics_pic.png"
+                            alt="otherocean" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">Avalon Holographics Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="avalonholographicsButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
                                 </div>
                             </div>
                         </div>
@@ -363,6 +378,15 @@
 
     </div>
 </footer>
+
+    <div id="loadingbutton" style="display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1050;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+          <div style="color: white; margin: 15px">Processing the Data...</div>
+      </div>
 
 <script src="../assets/verafinCheck.js"></script>
 </body>
