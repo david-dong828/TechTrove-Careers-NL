@@ -1,16 +1,369 @@
-<!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="light" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Positions Check In NL</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/style.css">
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Hugo 0.118.2" name="generator">
+    <title>Album example · Bootstrap v5.3</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" rel="stylesheet">
+    <link href="../assets/style.css" rel="stylesheet">
+
+    <link href="https://getbootstrap.com/docs/5.3/examples/album/" rel="canonical">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" rel="stylesheet">
+
+    <link crossorigin="anonymous" href="/docs/5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="/docs/5.3/assets/img/favicons/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/docs/5.3/assets/img/favicons/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+<!--    <link href="/docs/5.3/assets/img/favicons/manifest.json" rel="manifest">-->
+    <link color="#712cf9" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" rel="mask-icon">
+    <link href="/docs/5.3/assets/img/favicons/favicon.ico" rel="icon">
+    <meta content="#712cf9" name="theme-color">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-btn-hover-color);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-btn-color);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+    </style>
+
+
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<svg class="d-none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+    </symbol>
+</svg>
+
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button aria-expanded="false" aria-label="Toggle theme (light)"
+            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            data-bs-toggle="dropdown" id="bd-theme" type="button">
+        <svg class="bi my-1 theme-icon-active" height="1em" width="1em">
+            <use href="#sun-fill"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+    <ul aria-labelledby="bd-theme-text" class="dropdown-menu dropdown-menu-end shadow">
+        <li>
+            <button aria-pressed="true" class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="light"
+                    type="button">
+                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
+                    <use href="#sun-fill"></use>
+                </svg>
+                Light
+                <svg class="bi ms-auto d-none" height="1em" width="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                    type="button">
+                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
+                    <use href="#moon-stars-fill"></use>
+                </svg>
+                Dark
+                <svg class="bi ms-auto d-none" height="1em" width="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+        <li>
+            <button aria-pressed="false" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
+                    type="button">
+                <svg class="bi me-2 opacity-50 theme-icon" height="1em" width="1em">
+                    <use href="#circle-half"></use>
+                </svg>
+                Auto
+                <svg class="bi ms-auto d-none" height="1em" width="1em">
+                    <use href="#check2"></use>
+                </svg>
+            </button>
+        </li>
+    </ul>
+</div>
 
 
+<header data-bs-theme="dark">
+    <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4>About TechTrove Careers</h4>
+                    <p class="text-body-secondary">TechTrove Careers is a revolutionary job search platform specifically tailored for tech professionals and enthusiasts.<br>
+                      Our one-click solution aggregates job postings from multiple leading tech companies, streamlining the job-hunting process and saving valuable time.<br>
+                      Whether you're a seasoned tech expert or a recent graduate, TechTrove Careers offers a seamless and efficient way to explore a wide array of opportunities in the tech industry.<br>
+                      By bringing together a diverse range of job listings in one convenient location, we empower you to make informed career decisions and stay ahead in the competitive tech job market.<br>
+                      With TechTrove Careers, your next career move is just a click away!</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4>Contact</h4>
+                    <ul class="list-unstyled">
+<!--                        <li><a class="text-white" href="#">Follow on Twitter</a></li>-->
+<!--                        <li><a class="text-white" href="#">Like on Facebook</a></li>-->
+                        <li><a class="text-white" href="dongh@mun.ca">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <svg aria-hidden="true" class="me-2" fill="none" height="20" stroke="currentColor"
+                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <strong>TechTrove Careers</strong>
+            </a>
+            <button aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-bs-target="#navbarHeader" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
 
+<main data-bs-theme="light">
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">TechTrove Careers</h1>
+                <p class="lead text-body-secondary">TechTrove Careers is an innovative job search tool designed exclusively for discovering career opportunities in AIP tech companies based in Newfoundland and Labrador.
+                  With a simple click on a company icon, job seekers can access the latest job postings from a curated selection of top tech firms in the region.
+                  Our platform simplifies the search process, making it easier and faster for professionals to find their ideal tech role in NL. Whether you're a local talent or looking to move to this vibrant tech hub, TechTrove Careers is your gateway to exciting career possibilities in the AIP tech sector.</p>
+                <p>
+                    <a class="btn btn-primary my-2" href="#">Main call to action</a>
+                    <a class="btn btn-secondary my-2" href="#">Secondary action</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/verafin_pic.jpg"
+                            alt="verafin" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">Verafin Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="verafinButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/colab_pic.jpg"
+                            alt="colab" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">CoLab Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="colabButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/PolyUnity_pic.png"
+                            alt="polyunit" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">PolyUnit Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="polyunityButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/vision33_logo.jpg"
+                            alt="vission33" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">Vision33 Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="vision33Button" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/mysa_pic.jpg"
+                            alt="mysa" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">MySa Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="mysaButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/Strobeltek_pic.jpg"
+                            alt="strobeltek" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">Strobeltek Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="strobeltekButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="../assets/otherocean_pic.jpg"
+                            alt="otherocean" height="225" width="420" style="border: 1px solid black">
+                        <div class="card-body">
+                            <p class="card-text">OtherOcean Careers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button id="sotheroceanButton" class="btn btn-sm btn-outline-secondary" type="button">View Jobs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-body-secondary py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">© From David HAN</p>
+
+    </div>
+</footer>
+
+<script src="../assets/verafinCheck.js"></script>
 </body>
 </html>
