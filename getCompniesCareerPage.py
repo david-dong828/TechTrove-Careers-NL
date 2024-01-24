@@ -128,14 +128,13 @@ def checkColab(url):
     all_items = {}
     try:
         # get the <li> quantities within <ul>
-        list_item_count = len(driver.find_elements(By.XPATH, "//*[@id='w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5']/div"))
+        list_item_count = len(driver.find_elements(By.XPATH, "//div[contains(@class, 'career-grid-list')]/a"))
         print(list_item_count)
         for i in range(1, list_item_count + 1):
-            item = driver.find_element(By.XPATH, f"/html/body/div[3]/div[5]/div/div/div[1]/div/li[{i}]")
+            item = driver.find_element(By.XPATH, f"//div[contains(@class, 'career-grid-list')]/a[{i}]")
             jobLink = item.get_attribute("href")
             job_title = item.find_element(By.CSS_SELECTOR,"h6").text
             jobID = jobLink.split("/")[-1]
-            print(job_title,jobLink)
             all_items[jobID] = {
                 "job_title": job_title,
                 "link": jobLink
@@ -143,7 +142,7 @@ def checkColab(url):
             database_handle.saveTotable(company, job_title, jobLink, jobID, db, cursor)
 
         db.close()
-        # save_json(filePath, all_items)
+        save_json(filePath, all_items)
 
         return filePath
 
@@ -177,7 +176,7 @@ def main():
     
     #w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5 > div
     document.querySelector("#w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5 > div")
-    /html/body/div[3]/div[5]/div/div
+    //*[@id="w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5"]/div
     '''
 if __name__ == '__main__':
     main()

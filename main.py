@@ -2,7 +2,7 @@
 import json
 
 from flask import Flask,request,render_template,jsonify,Response
-from getCompniesCareerPage import checkVerafin
+from getCompniesCareerPage import checkVerafin,checkColab
 
 app = Flask(__name__,static_folder='assets')
 
@@ -23,6 +23,19 @@ def getVerafinJobs():
         print(data)
         return data
     else: return
+
+@app.route("/colab", methods=["POST"])
+def getColab():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "colab")
+
+    if url:
+        jobfile = checkColab(url)
+        data = readjson(jobfile)
+        print(data)
+        return data
+    else:
+        return
 
 def readjson(filePath):
     try:

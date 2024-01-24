@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    $("#verafinButton").click( function () {
-        fetch("/verafin", {
+    $(".viewJobsButton").click( function () {
+        var endpoint = $(this).data("endpoint")
+        fetch(endpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
