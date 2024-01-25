@@ -40,11 +40,18 @@ def getPolyU():
     url = find_value_by_partial_key(aipCompanies, "polyunit")
 
     if url:
-        jobfile = getCompniesCareerPage.checkPolyU(url)
-        if jobfile == "1" :
-            return "1"  # No job post
-        data = readjson(jobfile)
-        print(data)
+        data = getCompniesCareerPage.checkPolyU(url)
+        return data
+    else:
+        return "-1"
+
+@app.route("/vission33", methods=["POST"])
+def getVission33():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "vision33")
+
+    if url:
+        data = getCompniesCareerPage.checkVission33(url)
         return data
     else:
         return "-1"

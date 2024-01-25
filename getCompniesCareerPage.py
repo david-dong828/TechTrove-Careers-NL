@@ -95,7 +95,7 @@ def checkVerafin(url):
         return
     except NoSuchElementException:
         print("Could not find the elements within it.")
-        return
+        return "1"
     finally:
         driver.quit()
 
@@ -145,35 +145,91 @@ def checkColab(url):
         return
     except NoSuchElementException:
         print("Could not find the elements within it.")
-        return
+        return "1"
     finally:
         driver.quit()
 
 def checkPolyU(url):
     return "1" # No job post
+
+def checkVission33(url):
+    company = "colab"
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    job_file_id = company + "_" + today_date
+
+    # connect MySQL
+    db, cursor = database_handle.connectDB()
+    database_handle.createTable(cursor)
+
+    json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
+    if json_data:
+        return json_data
+
+    # Start scrape with Selenium
+    driver = seleniumDriver()
+    driver.get(url)
+
+    simulateHumanOperation(driver)
+
+    all_items = {}
+
+    try:
+
+        job_posts =  driver.find_elements(By.XPATH, '//*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a')
+
+        # Extract data and populate a dictionary
+        for jobItem in job_posts:
+            job_title = jobItem.find_element(By.XPATH, ".//div[contains(@class, 'col-md-3')][1]").text
+
+            link = jobItem.get_attribute("href")
+            jobID = link.split("/")[-1].split("-")[0]  # get 16347046 from jobs.vision33.com/careers/31076-Vision33/jobs/16347046-ByDesign-Implementation-Consultant
+
+            all_items[jobID] = {
+                'job_title': job_title,
+                'link': link
+            }
+        json_string = json.dumps(all_items)
+        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        db.close()
+        return all_items
+
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+        driver.save_screenshot('debug_screenshot_after_timeout.png')
+        return
+    except NoSuchElementException:
+        print("Could not find the elements within it.")
+        return "1"
+    finally:
+        driver.quit()
+
 def main():
     # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
     # jobFile = checkVerafin(verafin_link)
     # print(jobFile)
 
-    colab_link = "https://www.colabsoftware.com/careers#openings"
-    jobfile = checkColab(colab_link)
-    print(jobfile)
+    # colab_link = "https://www.colabsoftware.com/careers#openings"
+    # jobfile = checkColab(colab_link)
+    # print(jobfile)
 
     polu_link = "https://www.polyunity.com/work-with-us"
+
+    vission33_link = "https://jobs.vision33.com/"
+    s = checkVission33(vission33_link)
+
     '''
-    /html/body/div[3]/div[5]/div/div/div[1]/div
-    /html/body/div[3]/div[5]/div/div/div[1]/div/a[1]
-    /html/body/div[3]/div[5]/div/div/div[1]/div/a[2]
-    /html/body/div[3]/div[5]/div/div/div[1]/div/a[1]/h6
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[1]
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]/div
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]/div/div[1]
+    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]
+
     
-    #w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5 > div > a:nth-child(1)
-    //*[@id="w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5"]/div/a[1]
-    //*[@id="w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5"]/div
-    
-    #w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5 > div
-    document.querySelector("#w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5 > div")
-    //*[@id="w-node-_0efbb2ad-c225-2158-3f3c-f6195d0332d8-5d0332d5"]/div
+    #root > div > div > div > div > div > div > div.sc-esjQYD.hgtKgL > div > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div
     '''
 if __name__ == '__main__':
     main()
