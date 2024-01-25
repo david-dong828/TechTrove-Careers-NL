@@ -20,4 +20,6 @@ Our one-click solution aggregates job postings from multiple **Newfoundland** le
 ----
 
 
-![image](https://github.com/david-dong828/nl_aipcompaniesjobcheck/assets/106771290/fd17f4c6-e547-4b85-9555-8e38ea18fab8)
+
+https://github.com/david-dong828/TechTrove-Careers-NL/assets/106771290/31756667-7e20-4bfc-ab17-539d635e396c
+
