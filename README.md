@@ -16,6 +16,7 @@ Our one-click solution aggregates job postings from multiple **Newfoundland** le
 - *An issue that prevents from deploying on Vercel right now*
 - *Currently you can Run index.py to test*
 - Will Support more tech companies one by one
+- Now Supports: *Verafin, Colab, PolyUnit, Vission33*
 
 ----
 
