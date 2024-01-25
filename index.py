@@ -19,9 +19,7 @@ def getVerafinJobs():
     url = find_value_by_partial_key(aipCompanies,"verafin")
 
     if url:
-        jobfile = checkVerafin(url)
-        data = readjson(jobfile)
-        print(data)
+        data = checkVerafin(url)
         return data
     else: return "-1"
 
@@ -31,9 +29,7 @@ def getColab():
     url = find_value_by_partial_key(aipCompanies, "colab")
 
     if url:
-        jobfile = checkColab(url)
-        data = readjson(jobfile)
-        print(data)
+        data = checkColab(url)
         return data
     else:
         return "-1"

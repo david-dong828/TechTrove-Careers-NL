@@ -16,23 +16,15 @@ import random
 from urllib.parse import urlparse
 import database_handle
 
-def save_json(filePath, all_items):
-    with open(filePath,"w") as f:
-        json.dump(all_items,f)
+def is_job_json_existed_in_mysql(job_file_id,db,cursor,tableName="NL_TECH_JOBS"):
+    sql = f"select json_data from {tableName} where job_id = %s"
+    cursor.execute(sql,(job_file_id,))
 
-def is_job_file_existed(companyName):
-    today_date = datetime.now().strftime("%Y-%m-%d")
-    fileName = companyName + "_" + today_date + ".json"
+    result = cursor.fetchone()
 
-    foler = "temp"
-    if not os.path.exists(foler):
-        os.makedirs(foler)
-    filePath = os.path.join(foler,fileName)
-
-    if os.path.exists(filePath):
-        return True, filePath
-    else:
-        return False, filePath
+    if result:
+        json_data = json.loads(result[0])
+        return json_data
 
 def seleniumDriver():
     options = Options()
@@ -57,15 +49,17 @@ def simulateHumanOperation(driver):
     wait.until(lambda d: d.execute_script("return document.readyState === 'complete';"))
 
 def checkVerafin(url):
-    # If file already there, then stop and extract data
     company = "verafin"
-    isjobFileExisted, filePath = is_job_file_existed(company)
-    if isjobFileExisted:
-        return filePath
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    job_file_id = company + "_" + today_date
 
-    #connect MySQL
+    #connect MySQL check if record existed
     db, cursor = database_handle.connectDB()
     database_handle.createTable(cursor)
+
+    json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
+    if json_data:
+        return json_data
 
     # Start scrape with Selenium
     driver = seleniumDriver()
@@ -75,9 +69,6 @@ def checkVerafin(url):
 
     all_items = {}
     try:
-        # product_element can get all stuff within <ul> as a whole, but we need each <li>, so its useless here
-        # product_element = driver.find_element(By.CSS_SELECTOR,"#mainContent > div > div.css-uvpbop > section > ul")
-
         # get the <li> quantities within <ul>
         list_item_count = len(driver.find_elements(By.XPATH, "//*[@id='mainContent']/div/div[2]/section/ul/li"))
         # print(list_item_count)
@@ -91,12 +82,12 @@ def checkVerafin(url):
                 "job_title":jobItemPart.text,
                 "link":jobItemPart.get_attribute("href")
             }
-            database_handle.saveTotable(company,jobItemPart.text,jobItemPart.get_attribute("href"),jobID,db,cursor)
 
+        json_string = json.dumps(all_items)
+        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
         db.close()
-        save_json(filePath, all_items)
 
-        return filePath
+        return all_items
 
     except TimeoutException:
         print("Timed out waiting for page to load")
@@ -109,15 +100,17 @@ def checkVerafin(url):
         driver.quit()
 
 def checkColab(url):
-    # If file already there, then stop and extract data
     company = "colab"
-    isjobFileExisted, filePath = is_job_file_existed(company)
-    if isjobFileExisted:
-        return filePath
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    job_file_id = company + "_" + today_date
 
     # connect MySQL
     db, cursor = database_handle.connectDB()
     database_handle.createTable(cursor)
+
+    json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
+    if json_data:
+        return json_data
 
     # Start scrape with Selenium
     driver = seleniumDriver()
@@ -127,9 +120,9 @@ def checkColab(url):
 
     all_items = {}
     try:
-        # get the <li> quantities within <ul>
+        # get the .career-grid-list  have <a>
         list_item_count = len(driver.find_elements(By.XPATH, "//div[contains(@class, 'career-grid-list')]/a"))
-        print(list_item_count)
+
         for i in range(1, list_item_count + 1):
             item = driver.find_element(By.XPATH, f"//div[contains(@class, 'career-grid-list')]/a[{i}]")
             jobLink = item.get_attribute("href")
@@ -139,12 +132,12 @@ def checkColab(url):
                 "job_title": job_title,
                 "link": jobLink
             }
-            database_handle.saveTotable(company, job_title, jobLink, jobID, db, cursor)
 
+        json_string = json.dumps(all_items)
+        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
         db.close()
-        save_json(filePath, all_items)
 
-        return filePath
+        return all_items
 
     except TimeoutException:
         print("Timed out waiting for page to load")
@@ -163,9 +156,9 @@ def main():
     # jobFile = checkVerafin(verafin_link)
     # print(jobFile)
 
-    # colab_link = "https://www.colabsoftware.com/careers#openings"
-    # jobfile = checkColab(colab_link)
-    # print(jobfile)
+    colab_link = "https://www.colabsoftware.com/careers#openings"
+    jobfile = checkColab(colab_link)
+    print(jobfile)
 
     polu_link = "https://www.polyunity.com/work-with-us"
     '''
