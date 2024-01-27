@@ -56,6 +56,50 @@ def getVission33():
     else:
         return "-1"
 
+@app.route("/mysa", methods=["POST"])
+def getMysa():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "mysa")
+
+    if url:
+        data = getCompniesCareerPage.checkMysa(url)
+        return data
+    else:
+        return "-1"
+
+@app.route("/strobeltek", methods=["POST"])
+def getStrobeltek():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "strobel tek")
+
+    if url:
+        data = getCompniesCareerPage.checkStrobeltek(url)
+        return data
+    else:
+        return "-1"
+
+@app.route("/otherocean", methods=["POST"])
+def getOtherOcean():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "other ocean")
+
+    if url:
+        data = getCompniesCareerPage.checkOtherOcean(url)
+        return data
+    else:
+        return "-1"
+
+@app.route("/avalonholo", methods=["POST"])
+def getAvalonholo():
+    aipCompanies = readjson(aipCompanyfile)
+    url = find_value_by_partial_key(aipCompanies, "avalon")
+
+    if url:
+        data = getCompniesCareerPage.checkAvalonholo(url)
+        return data
+    else:
+        return "-1"
+
 def readjson(filePath):
     try:
         with open(filePath,"r") as f:

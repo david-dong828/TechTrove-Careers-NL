@@ -153,7 +153,7 @@ def checkPolyU(url):
     return "1" # No job post
 
 def checkVission33(url):
-    company = "colab"
+    company = "vission33"
     today_date = datetime.now().strftime("%Y-%m-%d")
     job_file_id = company + "_" + today_date
 
@@ -202,6 +202,18 @@ def checkVission33(url):
         return "1"
     finally:
         driver.quit()
+
+def checkMysa(url):
+    return "2" # wait for building
+
+def checkStrobeltek(url):
+    return "2"  # wait for building
+
+def checkOtherOcean(url):
+    return "2"  # wait for building
+
+def checkAvalonholo(url):
+    return "2"  # wait for building
 
 def main():
     # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
