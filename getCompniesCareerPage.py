@@ -15,16 +15,23 @@ from selenium.webdriver.common.action_chains import ActionChains
 import random
 from urllib.parse import urlparse
 import database_handle
+import mysql.connector
 
 def is_job_json_existed_in_mysql(job_file_id,db,cursor,tableName="NL_TECH_JOBS"):
-    sql = f"select json_data from {tableName} where job_id = %s"
-    cursor.execute(sql,(job_file_id,))
+    try:
+        sql = f"select json_data from {tableName} where job_id = %s"
+        cursor.execute(sql,(job_file_id,))
 
-    result = cursor.fetchone()
+        result = cursor.fetchone()
 
-    if result:
-        json_data = json.loads(result[0])
-        return json_data
+        if result and result[0]: # also check the json_data is not empty
+            json_data = json.loads(result[0])
+            return json_data
+        else:
+            return None
+    except mysql.connector.Error as err:
+        print(f"Error in is_job_json_existed_in_mysql: {err}")
+        return None
 
 def seleniumDriver():
     options = Options()
