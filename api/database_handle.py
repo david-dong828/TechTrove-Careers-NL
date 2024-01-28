@@ -1,5 +1,7 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
+from dotenv import load_dotenv
+load_dotenv()
 import os
 import mysql.connector
 
