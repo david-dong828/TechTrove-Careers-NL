@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import random
-import database_handle
+import api.database_handle
 import mysql.connector
 
 def is_job_json_existed_in_mysql(job_file_id,db,cursor,tableName="NL_TECH_JOBS"):
@@ -59,8 +59,8 @@ def checkVerafin(url):
     job_file_id = company + "_" + today_date
 
     #connect MySQL check if record existed
-    db, cursor = database_handle.connectDB()
-    database_handle.createTable(cursor)
+    db, cursor = api.database_handle.connectDB()
+    api.database_handle.createTable(cursor)
 
     json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
     if json_data:
@@ -89,7 +89,7 @@ def checkVerafin(url):
             }
 
         json_string = json.dumps(all_items)
-        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        api.database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
         db.close()
 
         return all_items
@@ -110,8 +110,8 @@ def checkColab(url):
     job_file_id = company + "_" + today_date
 
     # connect MySQL
-    db, cursor = database_handle.connectDB()
-    database_handle.createTable(cursor)
+    db, cursor = api.database_handle.connectDB()
+    api.database_handle.createTable(cursor)
 
     json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
     if json_data:
@@ -139,7 +139,7 @@ def checkColab(url):
             }
 
         json_string = json.dumps(all_items)
-        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        api.database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
         db.close()
 
         return all_items
@@ -163,8 +163,8 @@ def checkVission33(url):
     job_file_id = company + "_" + today_date
 
     # connect MySQL
-    db, cursor = database_handle.connectDB()
-    database_handle.createTable(cursor)
+    db, cursor = api.database_handle.connectDB()
+    api.database_handle.createTable(cursor)
 
     json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
     if json_data:
@@ -194,7 +194,7 @@ def checkVission33(url):
                 'link': link
             }
         json_string = json.dumps(all_items)
-        database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        api.database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
         db.close()
         return all_items
 

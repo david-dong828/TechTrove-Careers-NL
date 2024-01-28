@@ -2,8 +2,8 @@
 import json
 
 from flask import Flask, render_template
-from getCompniesCareerPage import checkVerafin,checkColab
-import getCompniesCareerPage
+from api.getCompniesCareerPage import checkVerafin,checkColab
+import api.getCompniesCareerPage
 
 app = Flask(__name__,static_folder='static')
 
@@ -36,12 +36,12 @@ def get_company_jobs(company):
         function_map = {
             "verafin": checkVerafin,
             "colab": checkColab,
-            "polyunit": getCompniesCareerPage.checkPolyU,
-            "vision33": getCompniesCareerPage.checkVission33,
-            "mysa": getCompniesCareerPage.checkMysa,
-            "strobel tek": getCompniesCareerPage.checkStrobeltek,
-            "other ocean": getCompniesCareerPage.checkOtherOcean,
-            "avalon": getCompniesCareerPage.checkAvalonholo
+            "polyunit": api.getCompniesCareerPage.checkPolyU,
+            "vision33": api.getCompniesCareerPage.checkVission33,
+            "mysa": api.getCompniesCareerPage.checkMysa,
+            "strobel tek": api.getCompniesCareerPage.checkStrobeltek,
+            "other ocean": api.getCompniesCareerPage.checkOtherOcean,
+            "avalon": api.getCompniesCareerPage.checkAvalonholo
         }
         scraping_function = function_map.get(company)
         if scraping_function:
