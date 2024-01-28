@@ -5,7 +5,7 @@ from flask import Flask, render_template
 from getCompniesCareerPage import checkVerafin,checkColab
 import getCompniesCareerPage
 
-app = Flask(__name__,static_folder='assets')
+app = Flask(__name__,static_folder='static')
 
 aipCompanyfile = "aipCompanies.json"
 

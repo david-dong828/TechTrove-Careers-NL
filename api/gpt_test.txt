@@ -1,0 +1,14 @@
+Scrape job position data from [https://www.vision33.com/careers]. 
+Beware that you have to click "see all current job openings" button to access the corrcet page to scrape the data.
+Extract job title, Location, Country.
+ The data should be in a json format
+'''
+{jobID:666,
+	{job_title:xxx,
+	link: xxxxxxx},
+jobID:777,
+	{job_title:xxx,
+	link: xxxxxxx},
+}
+'''
+Extract all job positions.
