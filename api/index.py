@@ -1,13 +1,14 @@
 # used to check programmer jobs of newfoundland aip companies
-import json
+import json,os
 
-from flask import Flask, render_template
+from flask import Flask, render_template,current_app
 from api.getCompniesCareerPage import checkVerafin,checkColab
 import api.getCompniesCareerPage
 
 app = Flask(__name__,static_folder='static')
 
-aipCompanyfile = "api/aipCompanies.json"
+# aipCompanyfile = "/api/aipCompanies.json"
+aipCompanyfile = os.path.join(os.path.dirname(__file__), 'aipCompanies.json')
 
 @app.route("/")
 def index():
