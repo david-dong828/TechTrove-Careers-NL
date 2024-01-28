@@ -1,6 +1,6 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-import json,os
+import json
 import time
 from datetime import datetime
 from selenium import webdriver
@@ -9,11 +9,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import random
-from urllib.parse import urlparse
 import database_handle
 import mysql.connector
 

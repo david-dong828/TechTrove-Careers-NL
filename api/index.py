@@ -1,7 +1,7 @@
 # used to check programmer jobs of newfoundland aip companies
 import json
 
-from flask import Flask,request,render_template,jsonify,Response
+from flask import Flask, render_template
 from getCompniesCareerPage import checkVerafin,checkColab
 import getCompniesCareerPage
 
@@ -39,9 +39,9 @@ def get_company_jobs(company):
             "polyunit": getCompniesCareerPage.checkPolyU,
             "vision33": getCompniesCareerPage.checkVission33,
             "mysa": getCompniesCareerPage.checkMysa,
-            "strobel tek":getCompniesCareerPage.checkStrobeltek,
-            "other ocean":getCompniesCareerPage.checkOtherOcean,
-            "avalon":getCompniesCareerPage.checkAvalonholo
+            "strobel tek": getCompniesCareerPage.checkStrobeltek,
+            "other ocean": getCompniesCareerPage.checkOtherOcean,
+            "avalon": getCompniesCareerPage.checkAvalonholo
         }
         scraping_function = function_map.get(company)
         if scraping_function:
