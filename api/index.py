@@ -7,7 +7,7 @@ import api.getCompniesCareerPage
 
 app = Flask(__name__,static_folder='static')
 
-aipCompanyfile = "aipCompanies.json"
+aipCompanyfile = "api/aipCompanies.json"
 
 @app.route("/")
 def index():
