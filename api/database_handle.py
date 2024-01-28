@@ -12,12 +12,7 @@ def connectDB():
         database="david"
     )
 
-    # db = mysql.connector.connect(
-    #     host="https://app.planetscale.com/david-dong828/david",
-    #     user="0li99e4aqzrxuj0kpx3o",
-    #     password="pscale_pw_1Hpwr3n74cTJdBP4QYcQ9dkbTQx8rMdENDwWWA6FrLw",
-    #     database="david"
-    # )
+   
 
     cursor = db.cursor()
 
