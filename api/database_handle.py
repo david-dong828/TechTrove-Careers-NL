@@ -1,23 +1,29 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-
+import os
 import mysql.connector
 
 def connectDB():
-    # For local mysql
-    db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="1234",
-        database="david"
-    )
-
+    ## For local mysql
     # db = mysql.connector.connect(
-    #     host="https://app.planetscale.com/david-dong828/david",
-    #     user="0li99e4aqzrxuj0kpx3o",
-    #     password="pscale_pw_1Hpwr3n74cTJdBP4QYcQ9dkbTQx8rMdENDwWWA6FrLw",
+    #     host="localhost",
+    #     user="root",
+    #     password="1234",
     #     database="david"
     # )
+
+    # For Vercel, using PlanetScale
+    db = mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USERNAME"),
+        passwd=os.getenv("DB_PASSWORD"),
+        db=os.getenv("DB_NAME"),
+        autocommit=True,
+        ssl_mode="VERIFY_IDENTITY",
+        ssl={
+            "ca": "/etc/ssl/cert.pem"
+        }
+    )
 
     cursor = db.cursor()
 
