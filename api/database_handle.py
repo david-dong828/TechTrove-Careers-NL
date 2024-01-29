@@ -21,11 +21,11 @@ def connectDB():
         user=os.getenv("DB_USERNAME"),
         passwd=os.getenv("DB_PASSWORD"),
         db=os.getenv("DB_NAME"),
-        autocommit=True,
+        # autocommit=True,
         # ssl_mode="VERIFY_IDENTITY",
-        ssl={
-            "ca": "/etc/ssl/cert.pem"
-        }
+        # ssl={
+        #     "ca": "/etc/ssl/cert.pem"
+        # }
     )
 
     cursor = db.cursor()
