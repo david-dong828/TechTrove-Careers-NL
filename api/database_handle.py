@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 import mysql.connector
+import MySQLdb
 
 def connectDB():
     ## For local mysql
@@ -21,7 +22,7 @@ def connectDB():
         passwd=os.getenv("DB_PASSWORD"),
         db=os.getenv("DB_NAME"),
         autocommit=True,
-        ssl_mode="VERIFY_IDENTITY",
+        # ssl_mode="VERIFY_IDENTITY",
         ssl={
             "ca": "/etc/ssl/cert.pem"
         }
