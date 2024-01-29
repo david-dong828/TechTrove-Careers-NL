@@ -23,10 +23,10 @@ def connectDB():
         passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
         db=os.getenv("PLANETSCALE_DB"),
         autocommit=True,
-        ssl_mode="VERIFY_IDENTITY",
-        ssl={
-            "ca": "/etc/ssl/cert.pem"
-        }
+        # ssl_mode="VERIFY_IDENTITY",
+        # ssl={
+        #     "ca": "/etc/ssl/cert.pem"
+        # }
     )
 
     cursor = db.cursor()
