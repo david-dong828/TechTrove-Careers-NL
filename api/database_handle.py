@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 import mysql.connector
-import MySQLdb
+
 
 def connectDB():
     ## For local mysql
