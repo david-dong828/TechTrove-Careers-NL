@@ -16,7 +16,7 @@ Our one-click solution aggregates job postings from multiple **Newfoundland** le
 - *An issue that is happening on Vercel right now*
   - I have integrated PlanetScale as an alternative to MySQL.
   - However, due to the limitations of Vercel's serverless environment, our data scraping functionality is currently non-operational. This is because Google Chrome, which is essential for the scraping process, is not available in this environment.
-  - Despite this setback, you can still explore the application's user interface by visiting the provided link.
+  - Despite this setback, you can still explore the application's user interface by visiting the provided link. https://tech-trove-careers-nl.vercel.app/
   - I am actively exploring potential solutions and will update the application if I manage to resolve this issue.
 - *Currently you can Run index.py to test*
 - Now Supports: *Verafin, Colab, PolyUnit, Vission33*
