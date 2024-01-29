@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 import mysql.connector
-import MySQLdb
+
 
 
 def connectDB():
@@ -17,11 +17,11 @@ def connectDB():
     # )
 
     # For Vercel, using PlanetScale
-    db = MySQLdb.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USERNAME"),
-        passwd=os.getenv("DB_PASSWORD"),
-        db=os.getenv("DB_NAME"),
+    db = mysql.connector.connect(
+        host=os.getenv("PLANETSCALE_DB_HOST"),
+        user=os.getenv("PLANETSCALE_DB_USERNAME"),
+        passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
+        db=os.getenv("PLANETSCALE_DB"),
         autocommit=True,
         ssl_mode="VERIFY_IDENTITY",
         ssl={
