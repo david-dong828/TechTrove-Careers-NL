@@ -55,5 +55,5 @@ def get_jobs(company):
     return get_company_jobs(company)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',port=5005)
 

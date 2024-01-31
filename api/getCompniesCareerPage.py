@@ -218,7 +218,51 @@ def checkOtherOcean(url):
     return "2"  # wait for building
 
 def checkAvalonholo(url):
-    return "2"  # wait for building
+    company = "avalon"
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    job_file_id = company + "_" + today_date
+
+    # connect MySQL check if record existed
+    db, cursor = api.database_handle.connectDB()
+    api.database_handle.createTable(cursor)
+
+    json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
+    if json_data:
+        return json_data
+
+    # Start scrape with Selenium
+    driver = seleniumDriver()
+    driver.get(url)
+
+    simulateHumanOperation(driver)
+
+    all_items = {}
+    try:
+        section_items = driver.find_element(By.TAG_NAME,"section")
+        h2_elements = section_items.find_elements(By.TAG_NAME,"h2")
+        for i in range(1,len(h2_elements)):
+            job_title = h2_elements[i].text
+            jobID = job_file_id + "_" + str(i)
+            all_items[jobID] = {
+                'job_title':job_title,
+                'link':url  # it doesnt have indivial link
+            }
+        json_string = json.dumps(all_items)
+        api.database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        db.close()
+        return all_items
+
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+        driver.save_screenshot('debug_screenshot_after_timeout.png')
+        return
+    except NoSuchElementException:
+        print("Could not find the elements within it.")
+        return "1"
+    finally:
+        driver.quit()
+
+    # return "2"  # wait for building
 
 def main():
     # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
@@ -229,24 +273,32 @@ def main():
     # jobfile = checkColab(colab_link)
     # print(jobfile)
 
-    polu_link = "https://www.polyunity.com/work-with-us"
+    # polu_link = "https://www.polyunity.com/work-with-us"
+    #
+    # vission33_link = "https://jobs.vision33.com/"
+    # s = checkVission33(vission33_link)
 
-    vission33_link = "https://jobs.vision33.com/"
-    s = checkVission33(vission33_link)
+    avalonholo = "https://www.avalonholographics.com/careers"
+    s = checkAvalonholo(avalonholo)
+    print(s)
 
     '''
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[1]
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]/div
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]/div/a[1]/div/div[1]
-    //*[@id="root"]/div/div/div/div/div/div/div[3]/div/div/div/div/div/div[2]/div[2]
-
+        
+    //*[@id="block-yui_3_17_2_1_1679312843316_49741"]/div/div/h2
+    //*[@id="yui_3_17_2_1_1706725577538_74"]
+    //*[@id="page-5e44162a10cb4a59c52f6758"]
+    //*[@id="yui_3_17_2_1_1706725577538_75"]
+    //*[@id="yui_3_17_2_1_1706725577538_76"]
+    //*[@id="yui_3_17_2_1_1706725577538_79"]
+    //*[@id="collection-5e44162a10cb4a59c52f6758"]
+    #collection-5e44162a10cb4a59c52f6758
     
-    #root > div > div > div > div > div > div > div.sc-esjQYD.hgtKgL > div > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div
+    //*[@id="block-yui_3_17_2_1_1706285521242_36196"]/div/div
+    /html/body/div[5]/div[2]/div/main/section/div/div/div/div[16]
+    #block-yui_3_17_2_1_1706285521242_36196
+    
+    //*[@id="block-yui_3_17_2_1_1679312843316_49741"]/div/div
+    #block-yui_3_17_2_1_1679312843316_49741 > div > div > h2
     '''
 if __name__ == '__main__':
     main()
