@@ -155,7 +155,7 @@ def checkColab(url):
         driver.quit()
 
 def checkPolyU(url):
-    return "1" # No job post
+    return "1" # No job post It's manual check and Need to check later in case any job posted
 
 def checkVission33(url):
     company = "vission33"
@@ -209,7 +209,55 @@ def checkVission33(url):
         driver.quit()
 
 def checkMysa(url):
-    return "2" # wait for building
+    company = "mysa"
+    today_date = datetime.now().strftime("%Y-%m-%d")
+    job_file_id = company + "_" + today_date
+
+    # connect MySQL
+    db, cursor = api.database_handle.connectDB()
+    api.database_handle.createTable(cursor)
+
+    json_data = is_job_json_existed_in_mysql(job_file_id, db, cursor)
+    if json_data:
+        return json_data
+
+    # Start scrape with Selenium
+    driver = seleniumDriver()
+    driver.get(url)
+
+    simulateHumanOperation(driver)
+
+    all_items = {}
+    try:
+        container_xpath = "//*[@id='lever-jobs-container']"
+        # Find all <a> elements within the container
+        a_elements = driver.find_elements(By.XPATH, f"{container_xpath}//a")
+        for a in a_elements:
+            job_title = a.text
+            jobLink = a.get_attribute('href')
+            jobID = jobLink.split("/")[-1]
+            all_items[jobID] = {
+                "job_title": job_title,
+                "link": jobLink
+            }
+
+        json_string = json.dumps(all_items)
+        api.database_handle.saveJsonFileToTable(job_file_id, json_string, db, cursor)
+        db.close()
+
+        return all_items
+
+    except TimeoutException:
+        print("Timed out waiting for page to load")
+        driver.save_screenshot('debug_screenshot_after_timeout.png')
+        return
+    except NoSuchElementException:
+        print("Could not find the elements within it.")
+        return "1"
+    finally:
+        driver.quit()
+
+    # return "2" # wait for building
 
 def checkStrobeltek(url):
     return "2"  # wait for building
@@ -264,7 +312,14 @@ def checkAvalonholo(url):
 
     # return "2"  # wait for building
 
+def checkEnamco(url):
+    return "1"  # No job post It's manual check and Need to check later in case any job posted
+
 def main():
+    mysa = "https://getmysa.com/pages/careers-ca"
+    s = checkMysa(mysa)
+    print(s)
+
     # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
     # jobFile = checkVerafin(verafin_link)
     # print(jobFile)
@@ -278,27 +333,13 @@ def main():
     # vission33_link = "https://jobs.vision33.com/"
     # s = checkVission33(vission33_link)
 
-    avalonholo = "https://www.avalonholographics.com/careers"
-    s = checkAvalonholo(avalonholo)
-    print(s)
+    # avalonholo = "https://www.avalonholographics.com/careers"
+    # s = checkAvalonholo(avalonholo)
+    # print(s)
 
     '''
-        
-    //*[@id="block-yui_3_17_2_1_1679312843316_49741"]/div/div/h2
-    //*[@id="yui_3_17_2_1_1706725577538_74"]
-    //*[@id="page-5e44162a10cb4a59c52f6758"]
-    //*[@id="yui_3_17_2_1_1706725577538_75"]
-    //*[@id="yui_3_17_2_1_1706725577538_76"]
-    //*[@id="yui_3_17_2_1_1706725577538_79"]
-    //*[@id="collection-5e44162a10cb4a59c52f6758"]
-    #collection-5e44162a10cb4a59c52f6758
+    //*[@id="postings"]/div
     
-    //*[@id="block-yui_3_17_2_1_1706285521242_36196"]/div/div
-    /html/body/div[5]/div[2]/div/main/section/div/div/div/div[16]
-    #block-yui_3_17_2_1_1706285521242_36196
-    
-    //*[@id="block-yui_3_17_2_1_1679312843316_49741"]/div/div
-    #block-yui_3_17_2_1_1679312843316_49741 > div > div > h2
     '''
 if __name__ == '__main__':
     main()

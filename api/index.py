@@ -42,7 +42,8 @@ def get_company_jobs(company):
             "mysa": api.getCompniesCareerPage.checkMysa,
             "strobel tek": api.getCompniesCareerPage.checkStrobeltek,
             "other ocean": api.getCompniesCareerPage.checkOtherOcean,
-            "avalon": api.getCompniesCareerPage.checkAvalonholo
+            "avalon": api.getCompniesCareerPage.checkAvalonholo,
+            "enaimco":api.getCompniesCareerPage.checkEnamco
         }
         scraping_function = function_map.get(company)
         if scraping_function:
