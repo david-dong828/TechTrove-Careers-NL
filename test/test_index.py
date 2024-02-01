@@ -4,6 +4,7 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from api import index
+from api import database_handle
 
 @pytest.fixture
 def mock_aip_companies():
@@ -46,3 +47,11 @@ def test_get_jobs_no_company_found(mock_find_value, mock_readjson, mock_aip_comp
 
     # Assertions
     assert result == -1
+
+def test_planetscale_connection():
+    planetscale_params = database_handle.get_planetscale_params()
+    db, cursor = database_handle.connectDB()
+    sql = "select * from NL_TECH_JOBS limit 1"
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    assert result != None

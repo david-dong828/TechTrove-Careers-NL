@@ -6,12 +6,12 @@ import mysql.connector
 
 def get_planetscale_params(file ='planetscale.json'):
     # To check if in CI env
-    if os.environ.get("host") and os.environ.get("user") and os.environ.get("passwd"):
+    if os.getenv("DB_HOST") and os.getenv("DB_USER") and os.getenv("DB_PASSWD"):
         return {
-            "host": os.environ.get("HOST"),
-            "user": os.environ.get("USER"),
-            "passwd": os.environ.get("PASSWD"),
-            "database": os.environ.get("DB")
+            "host": os.getenv("DB_HOST"),
+            "user": os.getenv("DB_USER"),
+            "passwd": os.getenv("DB_PASSWD"),
+            "database": os.getenv("DB_NAME")
         }
     else:
         params = {}

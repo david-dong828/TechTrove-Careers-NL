@@ -28,6 +28,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: set env var for database test
+      env:
+        PLANETSCALE_DB_HOST: ${{ secrets.HOST }}
+        PLANETSCALE_DB_USERNAME: ${{ secrets.USER }}
+        PLANETSCALE_DB_PASSWORD: ${{ secrets.PASSWD }}
+        PLANETSCALE_DB: ${{ secrets.DB }}
+      run: |
+        echo "DB_HOST=${PLANETSCALE_DB_HOST}" >> $GITHUB_ENV
+        echo "DB_USER=${PLANETSCALE_DB_USERNAME}" >> $GITHUB_ENV
+        echo "DB_PASSWD=${PLANETSCALE_DB_PASSWORD}" >> $GITHUB_ENV
+        echo "DB_NAME=${PLANETSCALE_DB}" >> $GITHUB_ENV
+
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
