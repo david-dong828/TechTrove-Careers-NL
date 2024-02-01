@@ -1,8 +1,7 @@
-# used to check programmer jobs of newfoundland aip companies
+# used to check programmer jobs of newfoundland tech companies
 import json,os
 
-from flask import Flask, render_template,current_app
-from api.getCompniesCareerPage import checkVerafin,checkColab
+from flask import Flask, render_template
 import api.getCompniesCareerPage
 
 app = Flask(__name__,static_folder='static')
@@ -29,31 +28,19 @@ def find_value_by_partial_key(data,partial_key):
             return value
     return
 
-def get_company_jobs(company):
+@app.route("/<company>", methods=["POST"])
+def get_jobs(company):
     aipCompanies = readjson(aipCompanyfile)
     url = find_value_by_partial_key(aipCompanies, company)
 
     if url:
-        function_map = {
-            "verafin": checkVerafin,
-            "colab": checkColab,
-            "polyunit": api.getCompniesCareerPage.checkPolyU,
-            "vision33": api.getCompniesCareerPage.checkVission33,
-            "mysa": api.getCompniesCareerPage.checkMysa,
-            "strobel tek": api.getCompniesCareerPage.checkStrobeltek,
-            "other ocean": api.getCompniesCareerPage.checkOtherOcean,
-            "avalon": api.getCompniesCareerPage.checkAvalonholo,
-            "enaimco":api.getCompniesCareerPage.checkEnamco
-        }
-        scraping_function = function_map.get(company)
-        if scraping_function:
-            return scraping_function(url)
+        scraper = api.getCompniesCareerPage.ScraperFactory.get_scraper(company,url)
+        if scraper:
+            result = scraper.scrape()
+            scraper.close_driver()
+            return result
     else:
-        return "-1"
-
-@app.route("/<company>", methods=["POST"])
-def get_jobs(company):
-    return get_company_jobs(company)
+        return -1
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5005)

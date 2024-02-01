@@ -1,11 +1,19 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-from dotenv import load_dotenv
-load_dotenv()
+import json
 import os
 import mysql.connector
 
-
+def get_planetscale_params(file ='planetscale.json'):
+    params = {}
+    planetScale_paramsfile = os.path.join(os.path.dirname(__file__), file)
+    with open(planetScale_paramsfile,"r") as f:
+        d= json.load(f)
+        params["host"] = d.get("host")
+        params["user"] = d.get("user")
+        params["passwd"] = d.get("passwd")
+        params["database"] = d.get("db")
+    return params
 
 def connectDB():
     ## For local mysql
@@ -16,23 +24,30 @@ def connectDB():
     #     database="david"
     # )
 
-    # For Vercel, using PlanetScale
+    # # For Vercel, using PlanetScale
+    # db = mysql.connector.connect(
+    #     host=os.getenv("PLANETSCALE_DB_HOST"),
+    #     user=os.getenv("PLANETSCALE_DB_USERNAME"),
+    #     passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
+    #     db=os.getenv("PLANETSCALE_DB"),
+    #     autocommit=True,
+    #     # ssl_mode="VERIFY_IDENTITY",
+    #     # ssl={
+    #     #     "ca": "/etc/ssl/cert.pem"
+    #     # }
+    # )
+
+    # For local but, using PlanetScale
+    planetsclae_params = get_planetscale_params()
     db = mysql.connector.connect(
-        host=os.getenv("PLANETSCALE_DB_HOST"),
-        user=os.getenv("PLANETSCALE_DB_USERNAME"),
-        passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
-        db=os.getenv("PLANETSCALE_DB"),
-        autocommit=True,
-        # ssl_mode="VERIFY_IDENTITY",
-        # ssl={
-        #     "ca": "/etc/ssl/cert.pem"
-        # }
+        host=planetsclae_params.get("host"),
+        user=planetsclae_params.get("user"),
+        passwd=planetsclae_params.get("passwd"),
+        db=planetsclae_params.get("database"),
+        autocommit=True
     )
-
     cursor = db.cursor()
-
     return db, cursor
-
 
 def createTable(cursor):
     cursor.execute(
@@ -70,6 +85,10 @@ def saveJsonFileToTable(job_id,json_string,db,cursor):
 
 def main():
     db, cursor = connectDB()
+    sql = "select * from NL_TECH_JOBS limit 1"
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    print(result)
 
 
 if __name__ == '__main__':
