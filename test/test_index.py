@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 from api.index import get_jobs
 
 @pytest.fixture
-def mock_aip_compnies():
+def mock_aip_companies():
     return {
         "verafin": "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin",
     }
