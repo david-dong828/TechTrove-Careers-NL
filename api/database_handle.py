@@ -5,15 +5,24 @@ import os
 import mysql.connector
 
 def get_planetscale_params(file ='planetscale.json'):
-    params = {}
-    planetScale_paramsfile = os.path.join(os.path.dirname(__file__), file)
-    with open(planetScale_paramsfile,"r") as f:
-        d= json.load(f)
-        params["host"] = d.get("host")
-        params["user"] = d.get("user")
-        params["passwd"] = d.get("passwd")
-        params["database"] = d.get("db")
-    return params
+    # To check if in CI env
+    if os.environ.get("host") and os.environ.get("user") and os.environ.get("passwd"):
+        return {
+            "host": os.environ.get("HOST"),
+            "user": os.environ.get("USER"),
+            "passwd": os.environ.get("PASSWD"),
+            "database": os.environ.get("DB")
+        }
+    else:
+        params = {}
+        planetScale_paramsfile = os.path.join(os.path.dirname(__file__), file)
+        with open(planetScale_paramsfile,"r") as f:
+            d= json.load(f)
+            params["host"] = d.get("host")
+            params["user"] = d.get("user")
+            params["passwd"] = d.get("passwd")
+            params["database"] = d.get("db")
+        return params
 
 def connectDB():
     ## For local mysql
@@ -59,17 +68,6 @@ def createTable(cursor):
     
         """
     )
-    # cursor.execute(
-    #     """
-    #     CREATE TABLE IF NOT EXISTS NL_JOB_DATA (
-    #
-    #         job_company varchar(100),
-    #         job_title varchar(255),
-    #         link varchar(255),
-    #         job_id varchar(50)
-    #     )
-    #     """
-    # )
 
 def saveTotable(company, title,link,jobid,db,cursor):
     sql = "INSERT INTO NL_JOB_DATA (job_company,job_title,link,job_id) values (%s,%s,%s,%s)"
