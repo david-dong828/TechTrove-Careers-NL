@@ -3,7 +3,7 @@
 
 import pytest
 from unittest.mock import patch, MagicMock
-from api.index import get_jobs
+from api import index
 
 @pytest.fixture
 def mock_aip_companies():
@@ -12,9 +12,9 @@ def mock_aip_companies():
     }
 
 
-@patch('index.readjson')
-@patch('index.find_value_by_partial_key')
-@patch('index.api.getCompniesCareerPage.ScraperFactory.get_scraper')
+@patch('api.index.readjson')
+@patch('api.index.find_value_by_partial_key')
+@patch('api.index.api.getCompniesCareerPage.ScraperFactory.get_scraper')
 def test_get_jobs_success(mock_get_scraper, mock_find_value, mock_readjson, mock_aip_companies):
     # Setup mock responses
     mock_readjson.return_value = mock_aip_companies
@@ -24,7 +24,7 @@ def test_get_jobs_success(mock_get_scraper, mock_find_value, mock_readjson, mock
     mock_get_scraper.return_value = mock_scraper_instance
 
     # Call the function under test
-    result = get_jobs("verafin")
+    result = index.get_jobs("verafin")
 
     # Assertions
     mock_readjson.assert_called_once()
@@ -34,15 +34,15 @@ def test_get_jobs_success(mock_get_scraper, mock_find_value, mock_readjson, mock
     assert result == {"jobs": "some job data"}
 
 
-@patch('index.readjson')
-@patch('index.find_value_by_partial_key')
+@patch('api.index.readjson')
+@patch('api.index.find_value_by_partial_key')
 def test_get_jobs_no_company_found(mock_find_value, mock_readjson, mock_aip_companies):
     # Setup mock responses
     mock_readjson.return_value = mock_aip_companies
     mock_find_value.return_value = None
 
     # Call the function under test expecting no company found
-    result = get_jobs("nonexistent company")
+    result = index.get_jobs("nonexistent company")
 
     # Assertions
     assert result == -1
