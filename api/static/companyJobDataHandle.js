@@ -20,6 +20,7 @@ $(document).ready(function () {
                 if (data === 1) {cardText.innerHTML = "No Position Open Right Now.";}
                 else if (data === -1) {cardText.innerHTML = "No Careers Link";}
                 else if (data === 2) {cardText.innerHTML = "Coming Soon...";}
+                else if (data === 3) {cardText.innerHTML = "No Careers on Its Official Website";}
                 else {
                     for (var jobID in data) {
                     var job = data[jobID];

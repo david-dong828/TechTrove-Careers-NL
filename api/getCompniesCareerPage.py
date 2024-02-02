@@ -50,7 +50,7 @@ class BaseScraper:
 
         api.database_handle.createTable(self.cursor)
 
-        json_data = is_job_json_existed_in_mysql(job_file_id, self.db, self.cursor)
+        json_data = is_job_json_existed_in_mysql(job_file_id, self.cursor)
         if json_data:
             return json_data
         return self.indivisual_scrape(job_file_id)
@@ -221,19 +221,23 @@ class AvalonHolographics(BaseScraper):
 
 class PolyUnitScraper(BaseScraper):
     def scrape(self,*args):
-        return 1 # No job post It's manual check and Need to check later in case any job posted
+        return "1" # No job post It's manual check and Need to check later in case any job posted
 
 class EnaimcoScraper(BaseScraper):
     def scrape(self,*args):
-        return 1 # No job post It's manual check and Need to check later in case any job posted
+        return "1" # No job post It's manual check and Need to check later in case any job posted
 
 class StrobelScraper(BaseScraper):
     def scrape(self,*args):
-        return 2 # wait for building
+        return "2" # wait for building
 
 class OtherOceanScraper(BaseScraper):
     def scrape(self,*args):
-        return 2 # wait for building
+        return "2" # wait for building
+
+class SiftMedScraper(BaseScraper):
+    def scrape(self,*args):
+        return "3" # No Careers on its Official wensite
 
 class ScraperFactory:
     @staticmethod
@@ -247,7 +251,8 @@ class ScraperFactory:
             "strobel tek": StrobelScraper,
             "other ocean": OtherOceanScraper,
             "avalon": AvalonHolographics,
-            "enaimco": EnaimcoScraper
+            "enaimco": EnaimcoScraper,
+            "siftmed": SiftMedScraper
         }
         scraper = scrapers.get(company.lower())
         if scraper:

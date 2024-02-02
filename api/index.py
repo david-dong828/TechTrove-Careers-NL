@@ -40,7 +40,7 @@ def get_jobs(company):
             scraper.close_driver()
             return result
     else:
-        return -1
+        return "-1"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5005)
