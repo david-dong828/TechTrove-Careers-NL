@@ -35,6 +35,13 @@ def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="NL_TECH_JOBS"):
         return None
 
 def getJobData(company):
+    if company in ["polyunit", "enaimco"]:
+        return "1"
+    if company in ["strobel tek","other ocean"]:
+        return "2"
+    if company in ["siftmed"]:
+        return "3"
+
     job_file_id = company + "_" + datetime.now().strftime("%Y-%m-%d")
     db, cursor = connectDB()
     json_data = is_job_json_existed_in_mysql(job_file_id, cursor)
