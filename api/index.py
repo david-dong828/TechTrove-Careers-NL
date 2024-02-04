@@ -1,7 +1,7 @@
 # used to check programmer jobs of newfoundland tech companies
 import json,os
-
-from flask import Flask, render_template
+import requests
+from flask import Flask, render_template, jsonify
 import api.getCompniesCareerPage
 
 app = Flask(__name__,static_folder='static')
@@ -33,6 +33,7 @@ def get_jobs(company):
     aipCompanies = readjson(aipCompanyfile)
     url = find_value_by_partial_key(aipCompanies, company)
 
+    # For local usage
     if url:
         scraper = api.getCompniesCareerPage.ScraperFactory.get_scraper(company,url)
         if scraper:
@@ -41,6 +42,22 @@ def get_jobs(company):
             return result
     else:
         return "-1"
+
+    # For work with AWS Lambda which holds the scrappers
+    # if url:
+    #     # Construct the payload to send to AWS Lambda
+    #     payload = {"company": company, "url": url}
+    #     # Call the AWS Lambda function through API Gateway
+    #     response = requests.post("http://api",json=payload)
+    #     print("endpoint...")
+    #     if response.status_code == 200:
+    #         result = response.json()
+    #         return jsonify(result)
+    #     else:
+    #         print("no 500")
+    #         return jsonify({"error": "Failed to scrape data"}), 500
+    # else:
+    #     return jsonify({"error": "Company not found"}), 404
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5005)

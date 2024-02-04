@@ -1,6 +1,6 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-import json
+import json,os
 import time
 from datetime import datetime
 from selenium import webdriver
@@ -51,6 +51,10 @@ class BaseScraper:
         api.database_handle.createTable(self.cursor)
 
         json_data = is_job_json_existed_in_mysql(job_file_id, self.cursor)
+
+        if os.getenv('VERCEL'):
+            return json_data if json_data else "4"
+
         if json_data:
             return json_data
         return self.indivisual_scrape(job_file_id)
