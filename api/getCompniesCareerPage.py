@@ -52,9 +52,6 @@ class BaseScraper:
 
         json_data = is_job_json_existed_in_mysql(job_file_id, self.cursor)
 
-        if os.getenv('VERCEL'):
-            return json_data if json_data else "4"
-
         if json_data:
             return json_data
         return self.indivisual_scrape(job_file_id)

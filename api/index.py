@@ -3,6 +3,7 @@ import json,os
 import requests
 from flask import Flask, render_template, jsonify
 import api.getCompniesCareerPage
+import api.for_vercel
 
 app = Flask(__name__,static_folder='static')
 
@@ -35,6 +36,8 @@ def get_jobs(company):
 
     # For local usage
     if url:
+        if os.getenv('VERCEL'):
+            return api.for_vercel.getJobData(company)
         scraper = api.getCompniesCareerPage.ScraperFactory.get_scraper(company,url)
         if scraper:
             result = scraper.scrape()
