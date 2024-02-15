@@ -21,7 +21,7 @@ Our one-click solution aggregates job postings from multiple **Newfoundland** le
   - and you also need to choose correct database setting on *database_handle.py*
 
 - Now Supports: **Verafin, Colab, Mysa, Vission33, AvalonHolographics, PolyUnity, Enaimco**
-- Will add more tech companies 
+- Will add more tech companies (Could be very slow)
 
 ----
 
