@@ -107,6 +107,19 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+
+        .update-container {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        #updateID {
+            margin-right: 8px;
+            font-weight: bold;
+            font-family: Arial;
+            font-size: large;
+        }
     </style>
 
 
@@ -189,10 +202,15 @@
                 <p>
 <!--                    <a class="btn btn-primary my-2" href="#">Main call to action</a>-->
 <!--                    <a class="btn btn-secondary my-2" href="#">Secondary action</a>-->
+
                 </p>
             </div>
         </div>
     </section>
+
+    <div class="update-container px-5 bg-body-tertiary d-flex justify-content-start align-items-center">
+        <p id="updateID">Update Date: <span id="currentDate"></span></p>
+    </div>
 
     <div class="album py-3 bg-body-tertiary">
         <div class="container">
@@ -372,5 +390,6 @@
       </div>
 
 <script src="../static/companyJobDataHandle.js"></script>
+<script src="../static/getDate.js"></script>
 </body>
 </html>
