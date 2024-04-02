@@ -2,6 +2,6 @@ Flask==3.0.0
 selenium==4.10.0
 mysql-connector-python==8.0.28
 webdriver_manager==4.0.1
+psycopg2-binary==2.9.9
 python-dotenv
 requests
-psycopg2
