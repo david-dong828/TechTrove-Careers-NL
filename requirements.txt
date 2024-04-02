@@ -4,4 +4,4 @@ mysql-connector-python==8.0.28
 webdriver_manager==4.0.1
 python-dotenv
 requests
-psycopg2-binary
+psycopg2
