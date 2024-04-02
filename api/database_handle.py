@@ -6,12 +6,12 @@ import psycopg2
 
 def get_planetscale_params(file ='vercel_postgres.json'):
     # To check if in CI env (GITHUB Workflow file)
-    if os.getenv("POSTGRES_HOST") and os.getenv("POSTGRES_USER") and os.getenv("POSTGRES_PASSWORD"):
+    if os.getenv("DB_HOST") and os.getenv("DB_USER") and os.getenv("DB_PASSWD"):
         return {
-            "host": os.getenv("POSTGRES_HOST"),
-            "user": os.getenv("POSTGRES_USER"),
-            "password": os.getenv("POSTGRES_PASSWORD"),
-            "database": os.getenv("POSTGRES_DATABASE")
+            "host": os.getenv("DB_HOST"),
+            "user": os.getenv("DB_USER"),
+            "password": os.getenv("DB_PASSWD"),
+            "database": os.getenv("DB_NAME")
         }
     else:
         params = {}

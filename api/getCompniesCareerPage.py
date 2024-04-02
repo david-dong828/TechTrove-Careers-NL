@@ -13,7 +13,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import random
 import api.database_handle
-import mysql.connector
+# import mysql.connector
+import psycopg2
 
 class BaseScraper:
     def __init__(self,company,url):
@@ -83,6 +84,7 @@ class VerafinScraper(BaseScraper):
                 }
             json_string = json.dumps(all_items)
             api.database_handle.saveJsonFileToTable(job_file_id, json_string, self.db, self.cursor)
+            self.db.commit()
             self.db.close()
             return all_items
 
@@ -115,6 +117,7 @@ class ColabScraper(BaseScraper):
 
             json_string = json.dumps(all_items)
             api.database_handle.saveJsonFileToTable(job_file_id, json_string, self.db, self.cursor)
+            self.db.commit()
             self.db.close()
             return all_items
 
@@ -149,6 +152,7 @@ class Vission33Scraper(BaseScraper):
                 }
             json_string = json.dumps(all_items)
             api.database_handle.saveJsonFileToTable(job_file_id, json_string, self.db, self.cursor)
+            self.db.commit()
             self.db.close()
             return all_items
 
@@ -180,6 +184,7 @@ class MysaScraper(BaseScraper):
 
             json_string = json.dumps(all_items)
             api.database_handle.saveJsonFileToTable(job_file_id, json_string, self.db, self.cursor)
+            self.db.commit()
             self.db.close()
             return all_items
 
@@ -208,6 +213,7 @@ class AvalonHolographics(BaseScraper):
                 }
             json_string = json.dumps(all_items)
             api.database_handle.saveJsonFileToTable(job_file_id, json_string, self.db, self.cursor)
+            self.db.commit()
             self.db.close()
             self.close_driver()
             return all_items
@@ -260,7 +266,7 @@ class ScraperFactory:
             return scraper(company,url)
         return None
 
-def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="NL_TECH_JOBS"):
+def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="nl_tech_jobs"):
     try:
         sql = f"select json_data from {tableName} where job_id = %s"
         cursor.execute(sql,(job_file_id,))
@@ -272,20 +278,21 @@ def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="NL_TECH_JOBS"):
             return json_data
         else:
             return None
-    except mysql.connector.Error as err:
+    except psycopg2.Error as err:
         print(f"Error in is_job_json_existed_in_mysql: {err}")
         return None
 
 #################################################### main for testing ###################################
 def main():
-    mysaurl = "https://getmysa.com/pages/careers-ca"
-    company = "mysa"
-    scraper = ScraperFactory.get_scraper(company,mysaurl)
-    print(scraper.scrape())
+    # mysaurl = "https://getmysa.com/pages/careers-ca"
+    # company = "mysa"
+    # scraper = ScraperFactory.get_scraper(company,mysaurl)
+    # print(scraper.scrape())
 
-    # verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
-    # jobFile = checkVerafin(verafin_link)
-    # print(jobFile)
+    verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
+    company = "verafin"
+    scraper = ScraperFactory.get_scraper(company, verafin_link)
+    print(scraper.scrape())
 
     # colab_link = "https://www.colabsoftware.com/careers#openings"
     # jobfile = checkColab(colab_link)
