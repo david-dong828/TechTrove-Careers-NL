@@ -23,8 +23,8 @@ def connectDB():
     db = psycopg2.connect(
         host=os.getenv("POSTGRES_HOST"),
         user=os.getenv("POSTGRES_USER"),
-        passwd=os.getenv("POSTGRES_PASSWORD"),
-        db=os.getenv("POSTGRES_DATABASE")
+        password=os.getenv("POSTGRES_PASSWORD"),
+        database=os.getenv("POSTGRES_DATABASE")
     )
     cursor = db.cursor()
     return db, cursor
