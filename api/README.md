@@ -10,11 +10,11 @@ Our one-click solution aggregates job postings from multiple **Newfoundland** le
  **Tech Stack:**
 
     - Python + CSS + HTML + JavaScript
-    - Flask + Selenium + MySQL(or PlanetScale for Vercel)
+    - Flask + Selenium + ~~MySQL(or PlanetScale for Vercel)~~+ Postgres
   
 **Notes:**                  
 - *An issue that is happening on Vercel right now*
-  - I have integrated PlanetScale as an alternative to MySQL.
+  - I have ~~integrated PlanetScale as an alternative to MySQL~~.changed to Postgres Since PlanetScale won't support free users anymore.
   - However, due to the limitations of Vercel's serverless environment, our data scraping functionality is currently non-operational. This is because Google Chrome, which is essential for the scraping process, is not available in this environment.
   - Despite this setback, you can still explore the application's user interface by visiting the provided link.
   - I am actively exploring potential solutions and will update the application if I manage to resolve this issue.
