@@ -31,15 +31,20 @@ jobs:
 
     - name: set env var for database test
       env:
-        PLANETSCALE_DB_HOST: ${{ secrets.HOST }}
-        PLANETSCALE_DB_USERNAME: ${{ secrets.USER }}
-        PLANETSCALE_DB_PASSWORD: ${{ secrets.PASSWD }}
-        PLANETSCALE_DB: ${{ secrets.DB }}
+        # PLANETSCALE_DB_HOST: ${{ secrets.HOST }}
+        # PLANETSCALE_DB_USERNAME: ${{ secrets.USER }}
+        # PLANETSCALE_DB_PASSWORD: ${{ secrets.PASSWD }}
+        # PLANETSCALE_DB: ${{ secrets.DB }}
+        
+        POSTGRES_DB_HOST: ${{ secrets.HOST_POSTGRES }}
+        POSTGRES_DB_USERNAME: ${{ secrets.USER_POSTGRES }}
+        POSTGRES_DB_PASSWORD: ${{ secrets.PASSWD_POSTGRES }}
+        POSTGRES_DB: ${{ secrets.DB_POSTGRES }}
       run: |
-        echo "DB_HOST=${PLANETSCALE_DB_HOST}" >> $GITHUB_ENV
-        echo "DB_USER=${PLANETSCALE_DB_USERNAME}" >> $GITHUB_ENV
-        echo "DB_PASSWD=${PLANETSCALE_DB_PASSWORD}" >> $GITHUB_ENV
-        echo "DB_NAME=${PLANETSCALE_DB}" >> $GITHUB_ENV
+        echo "DB_HOST=${POSTGRES_DB_HOST}" >> $GITHUB_ENV
+        echo "DB_USER=${POSTGRES_DB_USERNAME}" >> $GITHUB_ENV
+        echo "DB_PASSWD=${POSTGRES_DB_PASSWORD}" >> $GITHUB_ENV
+        echo "DB_NAME=${POSTGRES_DB}" >> $GITHUB_ENV
 
     - name: Lint with flake8
       run: |
