@@ -90,7 +90,7 @@ def main():
     # sql = "select * from NL_TECH_JOBS where job_id = 'verafin_2024-03-17' "
     # sql = "delete from NL_TECH_JOBS where job_id = 'verafin_2024-03-17'"
     cursor.execute(sql)
-    result = cursor.fetchone()
+    result = cursor.fetchall()
     print(result)
 
 

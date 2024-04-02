@@ -46,12 +46,11 @@ def test_get_jobs_no_company_found(mock_find_value, mock_readjson, mock_aip_comp
     result = index.get_jobs("nonexistent company")
 
     # Assertions
-    assert result == -1
+    assert result == '-1'
 
 def test_planetscale_connection():
-    planetscale_params = database_handle.get_planetscale_params()
     db, cursor = database_handle.connectDB()
-    sql = "select * from NL_TECH_JOBS limit 1"
+    sql = "select * from nl_tech_jobs "
     cursor.execute(sql)
     result = cursor.fetchone()
     assert result != None
