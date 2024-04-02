@@ -4,21 +4,32 @@
 import json
 from datetime import datetime,timedelta
 import os
-import mysql.connector
+# import mysql.connector
+import psycopg2
 
 def connectDB():
-    # For Vercel, using PlanetScale
-    db = mysql.connector.connect(
-        host=os.getenv("PLANETSCALE_DB_HOST"),
-        user=os.getenv("PLANETSCALE_DB_USERNAME"),
-        passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
-        db=os.getenv("PLANETSCALE_DB"),
-        autocommit=True
+    # # For Vercel, using PlanetScale
+    # db = mysql.connector.connect(
+    #     host=os.getenv("PLANETSCALE_DB_HOST"),
+    #     user=os.getenv("PLANETSCALE_DB_USERNAME"),
+    #     passwd=os.getenv("PLANETSCALE_DB_PASSWORD"),
+    #     db=os.getenv("PLANETSCALE_DB"),
+    #     autocommit=True
+    # )
+    # cursor = db.cursor()
+    # return db, cursor
+
+    #  For Vercel, using Postgres
+    db = psycopg2.connect(
+        host=os.getenv("POSTGRES_HOST"),
+        user=os.getenv("POSTGRES_USER"),
+        passwd=os.getenv("POSTGRES_PASSWORD"),
+        db=os.getenv("POSTGRES_DATABASE")
     )
     cursor = db.cursor()
     return db, cursor
 
-def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="NL_TECH_JOBS"):
+def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="nl_tech_jobs"):
     try:
         sql = f"select json_data from {tableName} where job_id = %s"
         cursor.execute(sql,(job_file_id,))
@@ -49,5 +60,5 @@ def getJobData(company):
         yesterday_job_file_id =  company + "_" +  (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
         json_data = is_job_json_existed_in_mysql(yesterday_job_file_id, cursor)
         if not json_data:
-            return "4"
+            return "4" # no data or not connection
     return json_data

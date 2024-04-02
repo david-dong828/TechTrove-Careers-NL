@@ -1,7 +1,6 @@
 # used to check programmer jobs of newfoundland tech companies
 import json,os
-import requests
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 import api.getCompniesCareerPage
 import api.for_vercel
 
