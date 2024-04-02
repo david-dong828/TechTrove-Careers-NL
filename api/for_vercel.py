@@ -41,7 +41,7 @@ def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="nl_tech_jobs"):
             return json_data
         else:
             return None
-    except mysql.connector.Error as err:
+    except psycopg2.Error as err:
         print(f"Error in is_job_json_existed_in_mysql: {err}")
         return None
 
