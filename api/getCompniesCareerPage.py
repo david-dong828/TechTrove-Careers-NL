@@ -1,6 +1,6 @@
 # Name: Dong Han
 # Mail: dongh@mun.ca
-import json,os
+import json
 import time
 from datetime import datetime
 from selenium import webdriver
@@ -13,7 +13,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import random
 import api.database_handle
-# import mysql.connector
 import psycopg2
 
 class BaseScraper:
@@ -283,33 +282,33 @@ def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="nl_tech_jobs"):
         return None
 
 #################################################### main for testing ###################################
-def main():
-    # mysaurl = "https://getmysa.com/pages/careers-ca"
-    # company = "mysa"
-    # scraper = ScraperFactory.get_scraper(company,mysaurl)
-    # print(scraper.scrape())
-
-    verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
-    company = "verafin"
-    scraper = ScraperFactory.get_scraper(company, verafin_link)
-    print(scraper.scrape())
-
-    # colab_link = "https://www.colabsoftware.com/careers#openings"
-    # jobfile = checkColab(colab_link)
-    # print(jobfile)
-
-    # polu_link = "https://www.polyunity.com/work-with-us"
-    #
-    # vission33_link = "https://jobs.vision33.com/"
-    # s = checkVission33(vission33_link)
-
-    # avalonholo = "https://www.avalonholographics.com/careers"
-    # s = checkAvalonholo(avalonholo)
-    # print(s)
-
-    '''
-    //*[@id="postings"]/div
-    
-    '''
-if __name__ == '__main__':
-    main()
+# def main():
+#     # mysaurl = "https://getmysa.com/pages/careers-ca"
+#     # company = "mysa"
+#     # scraper = ScraperFactory.get_scraper(company,mysaurl)
+#     # print(scraper.scrape())
+#
+#     verafin_link = "https://nasdaq.wd1.myworkdayjobs.com/en-US/US_External_Career_Site?q=verafin"
+#     company = "verafin"
+#     scraper = ScraperFactory.get_scraper(company, verafin_link)
+#     print(scraper.scrape())
+#
+#     # colab_link = "https://www.colabsoftware.com/careers#openings"
+#     # jobfile = checkColab(colab_link)
+#     # print(jobfile)
+#
+#     # polu_link = "https://www.polyunity.com/work-with-us"
+#     #
+#     # vission33_link = "https://jobs.vision33.com/"
+#     # s = checkVission33(vission33_link)
+#
+#     # avalonholo = "https://www.avalonholographics.com/careers"
+#     # s = checkAvalonholo(avalonholo)
+#     # print(s)
+#
+#     '''
+#     //*[@id="postings"]/div
+#
+#     '''
+# if __name__ == '__main__':
+#     main()

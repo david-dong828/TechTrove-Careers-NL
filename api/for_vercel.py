@@ -4,8 +4,8 @@
 import json
 from datetime import datetime,timedelta
 import os
-# import mysql.connector
-import psycopg2
+from psycopg2 import connect
+from psycopg2 import Error
 
 def connectDB():
     # # For Vercel, using PlanetScale
@@ -20,7 +20,7 @@ def connectDB():
     # return db, cursor
 
     #  For Vercel, using Postgres
-    db = psycopg2.connect(
+    db = connect(
         host=os.getenv("POSTGRES_HOST"),
         user=os.getenv("POSTGRES_USER"),
         password=os.getenv("POSTGRES_PASSWORD"),
@@ -41,7 +41,7 @@ def is_job_json_existed_in_mysql(job_file_id,cursor,tableName="nl_tech_jobs"):
             return json_data
         else:
             return None
-    except psycopg2.Error as err:
+    except Error as err:
         print(f"Error in is_job_json_existed_in_mysql: {err}")
         return None
 

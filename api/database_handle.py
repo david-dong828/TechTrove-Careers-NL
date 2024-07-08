@@ -2,7 +2,7 @@
 # Mail: dongh@mun.ca
 import json
 import os
-import psycopg2
+from psycopg2 import connect
 
 def get_planetscale_params(file ='vercel_postgres.json'):
     # To check if in CI env (GITHUB Workflow file)
@@ -48,7 +48,7 @@ def connectDB():
 
     # # For local but, using PlanetScale
     planetsclae_params = get_planetscale_params()
-    db = psycopg2.connect(
+    db = connect(
         host=planetsclae_params.get("host"),
         user=planetsclae_params.get("user"),
         password=planetsclae_params.get("password"),
