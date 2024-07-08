@@ -3,7 +3,7 @@ import json,os
 from flask import Flask, render_template
 import api.getCompniesCareerPage
 import api.for_vercel
-from threading import Thread
+from multiprocessing import Process
 from api.chatBot import chatBot_main
 
 app = Flask(__name__,static_folder='static')
@@ -74,15 +74,15 @@ def run_chat():
 if __name__ == '__main__':
     # app.run(host='0.0.0.0',port=5005)
     # Create threads for Flask and Taipy
-    flask_thread = Thread(target=run_flask)
-    chat_thread = Thread(target=run_chat)
+    flask_process = Process(target=run_flask)
+    chat_process = Process(target=run_chat)
 
     # Start both servers
-    flask_thread.start()
-    chat_thread.start()
+    flask_process.start()
+    chat_process.start()
 
     # Wait for both threads to complete (optional, depending on your shutdown strategy)
-    flask_thread.join()
-    chat_thread.join()
+    flask_process.join()
+    chat_process.join()
 
 

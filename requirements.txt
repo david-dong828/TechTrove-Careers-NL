@@ -8,4 +8,4 @@ requests
 openai==1.35.10
 taipy==3.0.0
 python-magic==0.4.27
-
+multiprocess==0.70.14
