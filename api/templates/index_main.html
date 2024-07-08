@@ -29,7 +29,7 @@
     <link href="/docs/5.3/assets/img/favicons/favicon.ico" rel="icon">
     <meta content="#712cf9" name="theme-color">
 
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -120,6 +120,25 @@
             font-family: Arial;
             font-size: large;
         }
+
+        #chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        #chat-container {
+            display: none;
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            width: 800px;
+            height: 600px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            z-index: 100;
+            overflow: hidden;
+        }
     </style>
 
 
@@ -164,7 +183,7 @@
                     <ul class="list-unstyled">
 <!--                        <li><a class="text-white" href="#">Follow on Twitter</a></li>-->
 <!--                        <li><a class="text-white" href="#">Like on Facebook</a></li>-->
-                        <li><a class="text-white" href="dongh@mun.ca">Email me</a></li>
+                        <li><a class="text-white" href="mailto:dongh@mun.ca">Email me</a></li>
                     </ul>
                 </div>
             </div>
@@ -190,15 +209,18 @@
     </div>
 </header>
 
+<button id="chat-button" class="px-4 py-1 text-lg text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Click me to Get AI Help</button>
+<div id="chat-container"></div>
+
 <main data-bs-theme="light">
 
     <section class="py-5 text-center container">
         <div class="row py-lg-1">
             <div class="col-lg-10 col-md-10 mx-auto">
-                <h1 class="fw-light">TechTrove Careers</h1>
-                <p class="lead text-body-secondary">TechTrove Careers is an innovative job search tool designed exclusively for discovering career opportunities in tech companies based in Newfoundland and Labrador.<br>
-                  With a simple click on a company icon, job seekers can access the latest job postings from a curated selection of top tech firms in the region.
-                  Our platform simplifies the search process, making it easier and faster for professionals to find their ideal tech role in NL. </p>
+                <h1 class="font-bold text-2xl">TechTrove Careers</h1>
+                <p class="lead text-body-secondary">TechTrove Careers is a cutting-edge job search tool for tech opportunities in Newfoundland and Labrador. <br>
+                    It offers <span class="font-bold text-purple-600 hover:text-blue-600"> easy access </span> to the latest postings from top tech companies and includes <span class="font-bold text-purple-600 hover:text-blue-600"> AI-driven tools </span> to analyze job positions and optimize resumes.<br>
+                    This streamlined platform helps professionals quickly find their ideal tech role in NL. </p>
                 <p>
 <!--                    <a class="btn btn-primary my-2" href="#">Main call to action</a>-->
 <!--                    <a class="btn btn-secondary my-2" href="#">Secondary action</a>-->
@@ -375,7 +397,7 @@
         <p class="float-end mb-1">
             <a href="#">Back to top</a>
         </p>
-        <p class="mb-1">© From David HAN</p>
+        <p class="mb-1">© From David HAN</p> <a class="px-4 py-1 text-black-600 font-semibold text-md rounded-full border border-purple-200 hover:bg-sky-700 " href="mailto:dongh@mun.ca">Email me</a>
 
     </div>
 </footer>
@@ -391,5 +413,6 @@
 
 <script src="../static/companyJobDataHandle.js"></script>
 <script src="../static/getDate.js"></script>
+<script src="../static/getChat.js"></script>
 </body>
 </html>

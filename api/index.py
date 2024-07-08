@@ -3,15 +3,35 @@ import json,os
 from flask import Flask, render_template
 import api.getCompniesCareerPage
 import api.for_vercel
+import threading
+from api.chatBot import chatBot_main
 
 app = Flask(__name__,static_folder='static')
+
+page = """
+<|layout|columns=300px 1|
+<|part|class_name=sidebar|
+# AI Job **Help**{: .color-primary} # {: .logo-text}
+<|New Conversation|button|class_name=fullwidth plain|id=reset_app_button|on_action=reset_chat|>
+### Previous activities ### {: .h5 .mt2 .mb-half}
+<|{selected_conv}|tree|lov={past_conversations}|class_name=past_prompts_list|multiple|adapter=tree_adapter|on_change=select_conv|>
+|>
+
+<|part|class_name=p2 align-item-bottom table|
+<|{conversation}|table|style=style_conv|show_all|selected={selected_row}|rebuild|>
+<|part|class_name=card mt1|
+<|{current_user_message}|input|label=Write your message here...|on_action=send_message|class_name=fullwidth|change_delay=-1|>
+|>
+|>
+|>
+"""
 
 # aipCompanyfile = "/api/aipCompanies.json"
 aipCompanyfile = os.path.join(os.path.dirname(__file__), 'aipCompanies.json')
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index_main.html")
 
 def readjson(filePath):
     try:
@@ -61,6 +81,25 @@ def get_jobs(company):
     # else:
     #     return jsonify({"error": "Company not found"}), 404
 
+
+def run_flask():
+    app.run(host='0.0.0.0', port=5005)
+
+def run_chat():
+    chatBot_main()
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5005)
+    # app.run(host='0.0.0.0',port=5005)
+    # Create threads for Flask and Taipy
+    flask_thread = threading.Thread(target=run_flask)
+    chat_thread = threading.Thread(target=run_chat)
+
+    # Start both servers
+    flask_thread.start()
+    chat_thread.start()
+
+    # Wait for both threads to complete (optional, depending on your shutdown strategy)
+    flask_thread.join()
+    chat_thread.join()
+
 

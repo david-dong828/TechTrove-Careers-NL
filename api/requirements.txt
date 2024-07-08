@@ -3,3 +3,8 @@ mysql-connector-python==8.0.28
 selenium==4.17.2
 webdriver_manager==4.0.1
 psycopg2-binary==2.9.9
+openai==1.35.10
+taipy==3.0.0
+python-magic
+python-magic-bin
+
