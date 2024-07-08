@@ -2,13 +2,13 @@
 # Mail: dongh@mun.ca
 
 from taipy.gui import Gui, State, notify
-import openai
+from openai import Client
 import os
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY"),
 
 
-client = openai.Client(api_key=OPENAI_API_KEY)
+client = Client(api_key=OPENAI_API_KEY)
 
 
 ### Initialize variables
